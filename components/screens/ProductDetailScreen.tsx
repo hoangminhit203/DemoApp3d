@@ -1,19 +1,17 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import FakeImage from '../../components/Product/Fakeimg';
-import Header from '../../components/ui/Header';
+import FakeImage from '../Product/Fakeimg';
+import Header from '../ui/Header';
 
 export default function ProductDetailScreen() {
-    const { id, title, seed } = useLocalSearchParams<{
-        id: string;
-        title: string;
-        seed: string;
-    }>();
+    const navigation = useNavigation();
+    const route = useRoute();
+    const { id, title, seed } = route.params as { id: string; title: string; seed: string };
 
     return (
         <ScrollView style={styles.container}>
-            <Header showBackButton={true} onBackPress={() => router.back()} />
+            <Header showBackButton={true} />
 
             <View style={styles.content}>
                 <View style={styles.imageContainer}>
@@ -83,14 +81,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontWeight: 'bold',
+        marginBottom: 16,
         color: '#333',
-        textAlign: 'center',
-        marginBottom: 20,
     },
     detailsContainer: {
         backgroundColor: '#fff',
-        padding: 16,
         borderRadius: 12,
+        padding: 16,
+        marginBottom: 16,
         elevation: 2,
         shadowColor: '#000',
         shadowOpacity: 0.1,
@@ -100,37 +98,32 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontWeight: 'bold',
+        marginBottom: 8,
         color: '#333',
-        marginBottom: 12,
     },
     description: {
-        fontSize: 16,
-        color: '#666',
-        lineHeight: 24,
-        marginBottom: 20,
+        fontSize: 15,
+        lineHeight: 22,
+        color: '#555',
+        marginBottom: 16,
     },
     specContainer: {
-        borderTopWidth: 1,
-        borderTopColor: '#e0e0e0',
-        paddingTop: 16,
+        marginTop: 16,
     },
     specRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingVertical: 8,
         borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
+        borderBottomColor: '#eee',
     },
     specLabel: {
-        fontSize: 16,
-        color: '#666',
-        flex: 1,
+        fontSize: 15,
+        color: '#555',
+        fontWeight: '500',
     },
     specValue: {
-        fontSize: 16,
+        fontSize: 15,
         color: '#333',
-        fontWeight: '500',
-        flex: 1,
-        textAlign: 'right',
     },
 });

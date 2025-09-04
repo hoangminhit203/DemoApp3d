@@ -1,7 +1,7 @@
-import { router } from "expo-router";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { FlatList, View } from "react-native";
-import ProductItem from "./ProductItem";
+import ProductItem from "../Product/ProductItem";
 
 const products = [
     {
@@ -57,8 +57,14 @@ const products = [
 ];
 
 export default function ProductList() {
+    const navigation = useNavigation();
+
     const handleProductPress = (item: typeof products[0]) => {
-        (router as any).push('/product-detail');
+        (navigation as any).navigate("ProductDetail", {
+            id: item.id,
+            title: item.title,
+            seed: item.seed
+        });
     };
 
     return (

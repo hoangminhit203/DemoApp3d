@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import FakeImage from "./Fakeimg";
+import FakeImage from "../Product/Fakeimg";
 
 type ProductItemProps = {
     seed: string;
