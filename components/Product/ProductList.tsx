@@ -1,7 +1,8 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { FlatList, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import ProductItem from "../Product/ProductItem";
+import ProductListHeader from "./ProductListHeader";
 
 const products = [
     {
@@ -69,6 +70,13 @@ export default function ProductList() {
 
     return (
         <View style={{ flex: 1, backgroundColor: "#f9f9f9" }}>
+            {/* Header */}
+            <ProductListHeader title="Siemsens" resultCount={products.length} />
+            {/* Resualt */}
+            <Text style={{ padding: 12, fontSize: 14, color: "#666" }}>
+                {products.length} search results
+            </Text>
+
             <FlatList
                 data={products}
                 keyExtractor={(item) => item.id}

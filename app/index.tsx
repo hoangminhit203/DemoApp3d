@@ -10,7 +10,6 @@ export default function HomeScreen() {
             <TouchableOpacity style={styles.menuButton} onPress={() => console.log("Menu clicked!")}>
                 <Ionicons name="menu" size={28} color="#fff" />
             </TouchableOpacity>
-
             <Logo />
             <BrandSearch />
         </View>

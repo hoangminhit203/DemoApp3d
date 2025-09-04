@@ -13,7 +13,7 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Main">
                 <Stack.Screen name="Main" component={DrawerNavigator} options={{ headerShown: false }} />
-                <Stack.Screen name="ProductList" component={ProductList} options={{ title: "Danh sách sản phẩm" }} />
+                <Stack.Screen name="ProductList" component={ProductList} options={{ headerShown: false }} />
                 <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="SearchScreen" component={SearchScreen} />
             </Stack.Navigator>
