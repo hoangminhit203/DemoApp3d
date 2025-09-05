@@ -7,7 +7,7 @@ import DrawerNavigator from "../components/navigation/DrawerNavigator";
 import ProductDetailScreen from "../components/screens/ProductDetailScreen";
 
 const Stack = createStackNavigator();
-
+// Đây là để chuyển trang xài Navigation 
 export default function App() {
     return (
         <NavigationContainer>

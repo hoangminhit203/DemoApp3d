@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-nati
 interface QuickSearchProps {
     onSearch: (term: string) => void;
 }
-
+// Thanh tìm kiếm 
 const popularSearchTerms = [
     '22kW',
     'Siemens',

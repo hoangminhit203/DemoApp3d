@@ -7,8 +7,8 @@ export default function NotificationsScreen() {
         <View style={styles.container}>
             <Header showMenuButton={true} />
             <View style={styles.content}>
-                <Text style={styles.title}>Thông báo</Text>
-                <Text style={styles.text}>Bạn không có thông báo mới.</Text>
+                <Text style={styles.title}>Notification</Text>
+                <Text style={styles.text}>No notifications.</Text>
             </View>
         </View>
     );

@@ -9,6 +9,13 @@ export interface Product {
     description: string;
     features: string[];
     children?: Product[];
+    instructions?: {
+        people?: number;
+        avgTimeMin?: number | null;
+        steps?: number;
+        tools?: Thumb[];
+        parts?: Thumb[];
+    };
 }
 
 export const productsData: Product[] = [
@@ -187,3 +194,5 @@ export const getAllCategories = (): string[] => {
     const categories = productsData.map(product => product.category);
     return [...new Set(categories)];
 };
+// data/products.ts
+export type Thumb = { id: string; seed: string; name?: string };

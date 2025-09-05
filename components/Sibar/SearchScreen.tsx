@@ -18,7 +18,7 @@ export default function SearchScreen() {
             const brandProducts = filterProductsByBrand(params.brandFilter);
             setSearchResults(brandProducts);
             setIsSearched(true);
-            setQuery(`Thương hiệu: ${params.brandFilter}`);
+            setQuery(`Brand: ${params.brandFilter}`);
         }
     }, [route.params]);
 
@@ -28,7 +28,7 @@ export default function SearchScreen() {
         setIsSearched(true);
 
         if (results.length === 0 && query.trim()) {
-            Alert.alert("Không tìm thấy", "Không có sản phẩm nào phù hợp với từ khóa tìm kiếm.");
+            Alert.alert("Not Found ", "There are no products matching your search term.");
         }
     };
 
@@ -53,7 +53,7 @@ export default function SearchScreen() {
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.input}
-                    placeholder="Tìm kiếm sản phẩm (VD: Siemens, EV Charger, 22kW...)"
+                    placeholder="Search for products(VD: Siemens, EV Charger, 22kW...)"
                     value={query}
                     onChangeText={setQuery}
                     autoFocus
@@ -63,7 +63,7 @@ export default function SearchScreen() {
                     style={styles.searchButton}
                     onPress={handleSearch}
                 >
-                    <Text style={styles.searchButtonText}>Tìm kiếm</Text>
+                    <Text style={styles.searchButtonText}>Search</Text>
                 </TouchableOpacity>
             </View>
 
@@ -71,14 +71,14 @@ export default function SearchScreen() {
                 style={styles.showAllButton}
                 onPress={showAllProducts}
             >
-                <Text style={styles.buttonText}>Hiển thị tất cả sản phẩm</Text>
+                <Text style={styles.buttonText}>Show All Product</Text>
             </TouchableOpacity>
 
             {/* Kết quả tìm kiếm */}
             {isSearched && (
                 <View style={styles.resultsContainer}>
                     <Text style={styles.resultsText}>
-                        {searchResults.length} kết quả tìm kiếm
+                        {searchResults.length} Search Results
                         {query.trim() && ` cho "${query}"`}
                     </Text>
 
