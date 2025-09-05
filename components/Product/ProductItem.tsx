@@ -1,18 +1,22 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import FakeImage from "../Product/Fakeimg";
+import ImageDisplay from "./ImageDisplay";
 
 type ProductItemProps = {
-    seed: string;
+    imageUrl?: string;
     title: string;
+    brand?: string;
+    price?: number;
     onPress?: () => void;
 };
 
-export default function ProductItem({ seed, title, onPress }: ProductItemProps) {
+export default function ProductItem({ imageUrl, title, brand, price, onPress }: ProductItemProps) {
     return (
         <TouchableOpacity style={styles.container} onPress={onPress}>
-            <FakeImage seed={seed} size={40} style={styles.image} />
+            <ImageDisplay imageUrl={imageUrl} size={40} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
+            {brand && <Text style={styles.brand}>{brand}</Text>}
+            {price && <Text style={styles.price}>{price.toLocaleString('vi-VN')} VNĐ</Text>}
         </TouchableOpacity>
     );
 }
@@ -38,5 +42,17 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: "500",
         flexShrink: 1,
+        color: "#333",
+    },
+    brand: {
+        fontSize: 12,
+        color: "#666",
+        marginTop: 2,
+    },
+    price: {
+        fontSize: 12,
+        fontWeight: "600",
+        color: "#007AFF",
+        marginTop: 2,
     },
 });

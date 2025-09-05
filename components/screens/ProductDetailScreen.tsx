@@ -9,8 +9,8 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import { Product, productsData } from "../../data/products";
-import FakeImage from "../Product/Fakeimg";
+import { Product3D, products3D } from "../../data/proucts3D";
+import ImageDisplay from "../Product/ImageDisplay";
 import MetricCircle from "../ProductDetail/MetricCircle";
 import RowTitle from "../ProductDetail/RowTitle";
 import ThumbRow, { ThumbItem } from "../ProductDetail/ThumbRow";
@@ -21,10 +21,10 @@ export default function ProductDetailScreen() {
     const route = useRoute();
     const { id } = route.params as { id: string };
 
-    const [product, setProduct] = useState<Product | null>(null);
+    const [product, setProduct] = useState<Product3D | null>(null);
 
     useEffect(() => {
-        const found = productsData.find((p) => p.id === id) || null;
+        const found = products3D.find((p) => p.id === id) || null;
         setProduct(found);
     }, [id]);
 
@@ -44,7 +44,7 @@ export default function ProductDetailScreen() {
         return {
             people: 1,
             avgTimeMin: undefined,
-            steps: product?.children?.length ? product.children.length + 10 : 13,
+            steps: product?.features?.length ? product.features.length + 10 : 13,
             tools,
             parts,
         };
@@ -70,7 +70,7 @@ export default function ProductDetailScreen() {
                 {/* Top product info */}
                 <View style={styles.top}>
                     <View style={styles.leading}>
-                        <FakeImage seed={product.seed} size={80} />
+                        <ImageDisplay imageUrl={product.image} size={80} />
                         <Text style={styles.productTitle} numberOfLines={2}>
                             {product.title}
                         </Text>

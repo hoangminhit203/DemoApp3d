@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import FakeImage from "../Product/Fakeimg";
+import ImageDisplay from "../Product/ImageDisplay";
 
 export type ThumbItem = { id: string; seed: string };
 
@@ -11,7 +11,10 @@ export default function ThumbRow({ items, size = 66 }: Props) {
         <View style={styles.row}>
             {items.map((it) => (
                 <View key={it.id} style={styles.item}>
-                    <FakeImage seed={it.seed} size={size} />
+                    <ImageDisplay
+                        imageUrl={`https://picsum.photos/seed/${encodeURIComponent(it.seed)}/${size}/${size}`}
+                        size={size}
+                    />
                 </View>
             ))}
         </View>
