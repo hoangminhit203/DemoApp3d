@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useMemo, useState } from "react";
 import {
     SafeAreaView,
@@ -17,7 +17,14 @@ import ThumbRow, { ThumbItem } from "../ProductDetail/ThumbRow";
 import Header from "../ui/Header";
 import LayeredCard from "../ui/LayeredCard";
 
+type RootStackParamList = {
+    ProductDetailScreen: { id: string };
+    InstructionScreen: { productId: string };
+    // add other screens if needed
+};
+
 export default function ProductDetailScreen() {
+    const navigation = useNavigation<import('@react-navigation/native').NavigationProp<RootStackParamList>>();
     const route = useRoute();
     const { id } = route.params as { id: string };
 
@@ -103,9 +110,13 @@ export default function ProductDetailScreen() {
                     <RowTitle title="PARTS LIST" actionText="View Info" onPressAction={() => { }} />
                     <ThumbRow items={ui.parts} />
 
-                    <TouchableOpacity style={styles.startBtn} onPress={() => { }}>
+                    <TouchableOpacity
+                        style={styles.startBtn}
+                        onPress={() => navigation.navigate("InstructionScreen", { productId: product.id })}
+                    >
                         <Text style={styles.startText}>Start</Text>
                     </TouchableOpacity>
+                    {/* Close LayeredCard */}
                 </LayeredCard>
             </ScrollView>
 
@@ -120,7 +131,7 @@ export default function ProductDetailScreen() {
                     <Text style={styles.tabLabel}>Receipts & more</Text>
                 </View>
             </View>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 

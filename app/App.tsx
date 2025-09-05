@@ -4,8 +4,8 @@ import * as React from "react";
 import ProductList from "../components/Product/ProductList";
 import SearchScreen from "../components/Sibar/SearchScreen";
 import DrawerNavigator from "../components/navigation/DrawerNavigator";
+import InstructionScreen from "../components/screens/InstructionScreen";
 import ProductDetailScreen from "../components/screens/ProductDetailScreen";
-
 const Stack = createStackNavigator();
 // Đây là để chuyển trang xài Navigation 
 export default function App() {
@@ -16,6 +16,11 @@ export default function App() {
                 <Stack.Screen name="ProductList" component={ProductList} options={{ headerShown: false }} />
                 <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="SearchScreen" component={SearchScreen} />
+                <Stack.Screen
+                    name="InstructionScreen"
+                    component={InstructionScreen}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
