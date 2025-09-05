@@ -1,12 +1,12 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { Product, filterProductsByBrand, searchProducts } from "../../data/products";
+import { Product3D, filterProductsByBrand3D, searchProducts3D } from "../../data/products3D";
 import ExpandableProductItem from "../Product/ExpandableProductItem";
 
 export default function SearchScreen() {
     const [query, setQuery] = useState('');
-    const [searchResults, setSearchResults] = useState<Product[]>([]);
+    const [searchResults, setSearchResults] = useState<Product3D[]>([]);
     const [isSearched, setIsSearched] = useState(false);
     const navigation = useNavigation();
     const route = useRoute();
@@ -15,7 +15,7 @@ export default function SearchScreen() {
     useEffect(() => {
         const params = route.params as { brandFilter?: string } | undefined;
         if (params?.brandFilter) {
-            const brandProducts = filterProductsByBrand(params.brandFilter);
+            const brandProducts = filterProductsByBrand3D(params.brandFilter);
             setSearchResults(brandProducts);
             setIsSearched(true);
             setQuery(`Brand: ${params.brandFilter}`);
@@ -23,7 +23,7 @@ export default function SearchScreen() {
     }, [route.params]);
 
     const handleSearch = () => {
-        const results = searchProducts(query);
+        const results = searchProducts3D(query);
         setSearchResults(results);
         setIsSearched(true);
 
@@ -32,16 +32,15 @@ export default function SearchScreen() {
         }
     };
 
-    const handleProductPress = (item: Product) => {
+    const handleProductPress = (item: Product3D) => {
         (navigation as any).navigate("ProductDetail", {
             id: item.id,
             title: item.title,
-            seed: item.seed,
         });
     };
 
     const showAllProducts = () => {
-        const allProducts = searchProducts('');
+        const allProducts = searchProducts3D('');
         setSearchResults(allProducts);
         setIsSearched(true);
         setQuery('');
@@ -79,7 +78,7 @@ export default function SearchScreen() {
                 <View style={styles.resultsContainer}>
                     <Text style={styles.resultsText}>
                         {searchResults.length} Search Results
-                        {query.trim() && ` cho "${query}"`}
+                        {query.trim() && `"${query}"`}
                     </Text>
 
                     <FlatList
@@ -88,8 +87,7 @@ export default function SearchScreen() {
                         renderItem={({ item }) => (
                             <ExpandableProductItem
                                 title={item.title}
-                                seed={item.seed}
-                                children={item.children}
+                                imageUrl={item.image}
                                 onPress={() => handleProductPress(item)}
                             />
                         )}

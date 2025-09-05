@@ -1,15 +1,27 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import ImageDisplay from "./ImageDisplay";
 
 type Props = {
     title: string;
-    seed: string; // dùng seed để sinh ảnh
+    imageUrl?: string;
+    brand?: string;
+    category?: string;
+    price?: number;
     children?: { id: string; title: string }[];
     onPress?: () => void;
 };
 
-export default function ExpandableProductItem({ title, seed, children, onPress }: Props) {
+export default function ExpandableProductItem({
+    title,
+    imageUrl,
+    brand,
+    category,
+    price,
+    children,
+    onPress
+}: Props) {
     const [expanded, setExpanded] = useState(false);
 
     const handlePress = () => {
@@ -25,13 +37,19 @@ export default function ExpandableProductItem({ title, seed, children, onPress }
             {/* Item chính */}
             <TouchableOpacity style={styles.item} onPress={handlePress}>
                 {/* Ảnh sản phẩm */}
-                <Image
-                    source={{ uri: `https://picsum.photos/seed/${seed}/60/60` }}
+                <ImageDisplay
+                    imageUrl={imageUrl}
+                    size={60}
                     style={styles.image}
                 />
 
-                {/* Tiêu đề */}
-                <Text style={styles.title}>{title}</Text>
+                {/* Thông tin sản phẩm */}
+                <View style={styles.productInfo}>
+                    <Text style={styles.title}>{title}</Text>
+                    {brand && <Text style={styles.brand}>{brand}</Text>}
+                    {category && <Text style={styles.category}>{category}</Text>}
+                    {price && <Text style={styles.price}>{price.toLocaleString('vi-VN')} VNĐ</Text>}
+                </View>
 
                 {/* Icon expand/collapse */}
                 {children && (
@@ -83,11 +101,29 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginRight: 12,
     },
-    title: {
+    productInfo: {
         flex: 1,
+    },
+    title: {
         fontSize: 16,
         fontWeight: "500",
         color: "#333",
+        marginBottom: 2,
+    },
+    brand: {
+        fontSize: 12,
+        color: "#666",
+        marginBottom: 1,
+    },
+    category: {
+        fontSize: 12,
+        color: "#888",
+        marginBottom: 2,
+    },
+    price: {
+        fontSize: 14,
+        fontWeight: "600",
+        color: "#007AFF",
     },
     childrenContainer: {
         paddingLeft: 70, // lệch so với ảnh
