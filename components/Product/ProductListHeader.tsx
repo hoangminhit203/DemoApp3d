@@ -14,7 +14,7 @@ export default function ProductListHeader({ title, resultCount }: Props) {
         <View style={styles.header}>
             {/* Nút Back */}
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                <Ionicons name="arrow-back" size={24} color="#333" />
+                <Ionicons name="arrow-back" size={24} color="#F54927" />
             </TouchableOpacity>
 
             {/* Tiêu đề Brand */}

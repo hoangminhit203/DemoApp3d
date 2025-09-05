@@ -1,89 +1,41 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, Text, View } from "react-native";
-import ProductItem from "../Product/ProductItem";
+import { Product, productsData } from "../../data/products";
+import ExpandableProductItem from "../Product/ExpandableProductItem";
 import ProductListHeader from "./ProductListHeader";
-
-const products = [
-    {
-        id: "1",
-        title: "Siemens 8EM1310-5HF14-1GA2 - VersiCharge AC",
-        seed: "siemens-charger-1",
-    },
-    {
-        id: "2",
-        title: "Siemens 8EM13900EG00 - VersiCharge AC Wall Mount",
-        seed: "siemens-wallmount-2",
-    },
-    {
-        id: "3",
-        title: "Siemens Inhab Intelligent Habitat",
-        seed: "siemens-habitat-3",
-    },
-    {
-        id: "4",
-        title: "ABB Terra AC Wallbox 22kW",
-        seed: "abb-terra-4",
-    },
-    {
-        id: "5",
-        title: "Schneider Electric EVlink Pro AC",
-        seed: "schneider-evlink-5",
-    },
-    {
-        id: "6",
-        title: "Delta AC Max 22kW Smart Charging Station",
-        seed: "delta-acmax-6",
-    },
-    {
-        id: "7",
-        title: "KEBA KeContact P30 c-series",
-        seed: "keba-kecontact-7",
-    },
-    {
-        id: "8",
-        title: "Wallbe Eco 2.0 22kW",
-        seed: "wallbe-eco-8",
-    },
-    {
-        id: "9",
-        title: "Phoenix Contact AC Charging Controller",
-        seed: "phoenix-controller-9",
-    },
-    {
-        id: "10",
-        title: "Mennekes AMTRON Xtra 22kW",
-        seed: "mennekes-amtron-10",
-    },
-];
 
 export default function ProductList() {
     const navigation = useNavigation();
+    const [products, setProducts] = useState<Product[]>(productsData);
 
-    const handleProductPress = (item: typeof products[0]) => {
+    const handleProductPress = (item: Product) => {
         (navigation as any).navigate("ProductDetail", {
             id: item.id,
             title: item.title,
-            seed: item.seed
+            seed: item.seed,
         });
     };
 
     return (
         <View style={{ flex: 1, backgroundColor: "#f9f9f9" }}>
             {/* Header */}
-            <ProductListHeader title="Siemsens" resultCount={products.length} />
-            {/* Resualt */}
+            <ProductListHeader title="All Products" resultCount={products.length} />
+
+            {/* Result text */}
             <Text style={{ padding: 12, fontSize: 14, color: "#666" }}>
                 {products.length} search results
             </Text>
 
+            {/* List */}
             <FlatList
                 data={products}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <ProductItem
-                        seed={item.seed}
+                    <ExpandableProductItem
                         title={item.title}
+                        seed={item.seed}
+                        children={item.children}
                         onPress={() => handleProductPress(item)}
                     />
                 )}

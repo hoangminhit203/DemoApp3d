@@ -23,7 +23,7 @@ export default function BackButton({ onPress }: BackButtonProps) {
             style={styles.backButton}
             onPress={handlePress}
         >
-            <Ionicons name="arrow-back" size={28} color="#fff" />
+            <Ionicons name="arrow-back" size={28} color="#FFA500" />
         </TouchableOpacity>
     );
 }
