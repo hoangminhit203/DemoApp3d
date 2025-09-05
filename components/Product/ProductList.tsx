@@ -24,7 +24,7 @@ export default function ProductList() {
 
             {/* Result text */}
             <Text style={{ padding: 12, fontSize: 14, color: "#666" }}>
-                {products.length} search results
+                {products.length} Search Results
             </Text>
 
             {/* List */}
